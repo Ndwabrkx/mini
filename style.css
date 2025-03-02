@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Quest ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4d79;
+        }
+        .heart {
+            font-size: 40px;
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        button {
+            background-color: #ff4d79;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff1a66;
+        }
+        .hidden {
+            display: none;
+        }
+        .love-message {
+            font-size: 1.4em;
+            color: #ff4d79;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .choice {
+            margin: 10px 0;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="startScreen">
+        <h1>❤️ Welcome to Love Quest! ❤️</h1>
+        <p class="heart">💖</p>
+        <p>Hey love, ready for a cute adventure?</p>
+        <button onclick="startGame()">Start Now!</button>
+    </div>
+
+    <div class="container hidden" id="question1">
+        <h1>Question 1 🥰</h1>
+        <p>Do you love me? 😘</p>
+        <button onclick="nextQuestion(2, true)">Yes! 💕</button>
+        <button onclick="nextQuestion(2, false)">No 😢</button>
+    </div>
+
+    <div class="container hidden" id="question2">
+        <h1>Question 2 💖</h1>
+        <p>How much do you love me? 😍</p>
+        <input type="number" id="loveScale" min="1" max="10" placeholder="Rate 1-10">
+        <button onclick="rateLove()">Submit</button>
+    </div>
+
+    <div class="container hidden" id="finalScreen">
+        <h1>💘 My Love for You 💘</h1>
+        <p class="love-message">You are my everything! 😍</p>
+        <img src="https://source.unsplash.com/600x400/?love,romance" alt="Love Image">
+        <p>Here's a little something just for you! 💕</p>
+        <button onclick="restartGame()">Play Again</button>
+    </div>
+
+    <script>
+        function startGame() {
+            document.getElementById("startScreen").classList.add("hidden");
+            document.getElementById("question1").classList.remove("hidden");
+        }
+
+        function nextQuestion(next, lovesMe) {
+            document.getElementById("question1").classList.add("hidden");
+
+            if (!lovesMe) {
+                alert("😭 But I still love you forever! 💖");
+                return restartGame();
+            }
+
+            document.getElementById("question" + next).classList.remove("hidden");
+        }
+
+        function rateLove() {
+            let loveValue = document.getElementById("loveScale").value;
+            if (!loveValue || loveValue < 5) {
+                alert("😢 I must try harder! But I still adore you! ❤️");
+                return restartGame();
+            }
+            alert("Awww! You're the best! 😍");
+
+            document.getElementById("question2").classList.add("hidden");
+            document.getElementById("finalScreen").classList.remove("hidden");
+        }
+
+        function restartGame() {
+            document.getElementById("finalScreen").classList.add("hidden");
+            document.getElementById("startScreen").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+</html>
